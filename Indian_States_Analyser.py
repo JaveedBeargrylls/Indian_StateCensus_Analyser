@@ -6,7 +6,7 @@
 @Last Modified time: 2021-09-04 16:21:15
 @Title : Indian_States_Analyser.
 '''
-import csv 
+import csv
 import os
 
 class Indian_States_Analyser:
@@ -53,7 +53,7 @@ class Indian_States_Analyser:
         Parameter: 
                     filename takes file name as file Input
         Return:     
-                    returning the file type and file exists or not
+                    returning the file type and file exists or not exists
          '''
         try:
             if os.path.isfile(filename):
