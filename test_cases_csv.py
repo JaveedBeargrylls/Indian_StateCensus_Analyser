@@ -16,12 +16,9 @@ class TestAnalyser(unittest.TestCase):
         Description: Function to test the recorded data
         Return: test case pass/file 
         '''
-        try:
-            self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecensusdata.csv'),29)      
-            self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecensusdata.csv'),30)
-        except Exception:
-            print("Error expected at Records at State_census_analys")
-
+        self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecensusdata.csv'),29)      
+        self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecensusdata.csv'),30)
+        
     def test_records_States_code(self):
         '''
         Description: Function to test the recorded data
