@@ -8,9 +8,11 @@
 '''
 import csv
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class Indian_States_Analyser:
-    def records(filename):
+    def records(self,filename):
         '''
         Description: 
                     Function to Records the count
@@ -27,7 +29,7 @@ class Indian_States_Analyser:
                 record += 1
         return record
 
-    def extentions(filename):
+    def extentions(self,filename):
         '''
         Description: 
                 Checking of Extension
@@ -46,7 +48,7 @@ class Indian_States_Analyser:
                 print('Extention is Not Matched')
         return file_type[1]
 
-    def file_name(filename):
+    def file_name(self,filename):
         '''
         Description:
                     Checking of fileName
@@ -66,7 +68,7 @@ class Indian_States_Analyser:
                 print("File is not found")
         return filename
 
-    def header(filename):
+    def header(self,filename):
         '''
         Description: Function to Records the count
         Parameter: filename takes file name as file Input
@@ -158,16 +160,17 @@ if __name__ == '__main__':
     
     csv_analyser = State_Code()
     # call record passing file name as state census csv
-    csv_analyser.records('StateCensusData.csv')
+    # csv_analyser.records('StateCensusData.csv')
+    csv_analyser.records(os.getenv('FILE_SCD'))
     # call record passing file name as state code csv
-    csv_analyser.records('StateCode.csv')
+    csv_analyser.records('FILE_SC')
     # check extension passing file name state census csv
-    csv_analyser.extentions('StateCensusData.csv')  
+    csv_analyser.extentions('FILE_SCD')  
     # check extension passing file name state code csv
-    csv_analyser.extentions('StateCode.csv') 
+    csv_analyser.extentions('FILE_SC') 
     # check header passing state census csv header as list and also state census csv filename 
-    csv_analyser.header('StateCensusData.csv')
+    csv_analyser.header('FILE_SCD')
     # check header passing state code csv header as list and also state code csv filename
-    csv_analyser.header('StateCode.csv')
+    csv_analyser.header('FILE_SC')
     # get the dict pass
     csv_analyser.states_code_and_name()
