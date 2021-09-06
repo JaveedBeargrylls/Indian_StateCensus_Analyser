@@ -18,17 +18,14 @@ class TestAnalyser(unittest.TestCase):
         '''
         self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecensusdata.csv'),29)      
         self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecensusdata.csv'),30)
-        
+
     def test_records_States_code(self):
         '''
         Description: Function to test the recorded data
         Return: test case pass/file 
         '''
-        try:
-            self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecode'),30)       
-            self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecode'),37)
-        except Exception:
-            print("Error expected at Records at CSV_States code")   
+        self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecode'),30)       
+        self.assertEqual(Indian_States_Analyser.Indian_States_Analyser.records('statecode'),37)
 
     def test_file_name(self):
         '''
