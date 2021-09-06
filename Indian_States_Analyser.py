@@ -8,13 +8,14 @@
 '''
 import csv
 import os
+import json
 from dotenv import load_dotenv
 load_dotenv()
 
 class Indian_States_Analyser:
     def records(self,filename):
         '''
-        Description: 
+        Description:
                     Function to Records the count
         Parameter: 
                     Filename takes file name as file Input
@@ -122,23 +123,21 @@ class State_Census_Analyser(Indian_States_Analyser):
             csv_reader = csv.reader(csv_file)
             for row in csv_reader:
                     new_states_census_file.append(row)
-            print(new_states_census_file)
+            # print(new_states_census_file)
         for line in new_states_census_file:
             key = line[0]
+            #  print(key)
             try:
                 if key in dict_state_code:
                     line.append(dict_state_code.get(line[0]))
-                else:
-                    raise Exception(KeyError)
             except KeyError:
-                print("This Key is not avaiable")
+                 raise Exception(KeyError)
         new_states_census_file[0].append('StateCode')
-        print(new_states_census_file)
+        # print(new_states_census_file)
             
         with open('new_State_Census_file.csv', 'w',newline = '') as new_csv_file:
              writer = csv.writer(new_csv_file)
              writer.writerows(new_states_census_file)
-
 class State_Code(State_Census_Analyser):
     #Code for StateCode.csv file
     def states_code_and_name(self):
@@ -154,7 +153,17 @@ class State_Code(State_Census_Analyser):
             csv_reader = csv.reader(csv_file)
             dict_state_code = {rows[1]:rows[3] for rows in csv_reader}
             print(dict_state_code)            
-  
+class Json_Code():
+    def new_json():
+        data = {}
+        with open(os.getenv('FILE_NSC'),'r') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            for rows in csv_reader:
+                key = rows['State']
+                data[key] = rows
+
+        with open('New_json_file.json','w') as dict_file:
+            dict_file.write(json.dumps(data,indent=4))
 
 if __name__ == '__main__':
     
@@ -163,14 +172,16 @@ if __name__ == '__main__':
     # csv_analyser.records('StateCensusData.csv')
     csv_analyser.records(os.getenv('FILE_SCD'))
     # call record passing file name as state code csv
-    csv_analyser.records('FILE_SC')
+    csv_analyser.records(os.getenv('FILE_SC'))
     # check extension passing file name state census csv
-    csv_analyser.extentions('FILE_SCD')  
+    csv_analyser.extentions(os.getenv('FILE_SCD'))  
     # check extension passing file name state code csv
-    csv_analyser.extentions('FILE_SC') 
+    csv_analyser.extentions(os.getenv('FILE_SC')) 
     # check header passing state census csv header as list and also state census csv filename 
-    csv_analyser.header('FILE_SCD')
+    csv_analyser.header(os.getenv('FILE_SCD'))
     # check header passing state code csv header as list and also state code csv filename
-    csv_analyser.header('FILE_SC')
+    csv_analyser.header(os.getenv('FILE_SC'))
     # get the dict pass
-    csv_analyser.states_code_and_name()
+    # csv_analyser.states_code_and_name()
+    csv_analyser.state_census_analys()
+    Json_Code.new_json()
